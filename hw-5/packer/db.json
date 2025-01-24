@@ -1,0 +1,38 @@
+{
+  "variables": {
+    "region": "us-east-1",
+    "base_ami": "ami-06b21ccaeff8cd686",
+    "instance_size": "t2.micro"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `base_ami`}}",
+      "instance_type": "{{user `instance_size`}}",
+      "ami_name": "my-mysql-ami",
+      "ssh_username": "ubuntu",
+      "ssh_timeout": "20m",
+      "tags": {
+        "Project": "DevOps",
+        "ami_type": "mysql",
+        "OS": "ubuntu_2204",
+        "BuiltBy": "Packer"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo apt-get update",
+        "sudo apt-get install -y mysql-server"
+      ]
+    },
+    {
+      "type": "shell",
+      "script": "scripts/install_mysql.sh",
+      "execute_command": "sudo {{.Path}}"
+    }
+  ]
+}

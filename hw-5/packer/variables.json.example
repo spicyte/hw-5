@@ -1,0 +1,10 @@
+{
+  "region": "us-east-1",
+  "base_ami": "ami-06b21ccaeff8cd686",
+  "instance_size": "t2.micro",
+  "ami_name": "example-ami-name",
+  "project": "DevOps",
+  "ami_type": "nginx",
+  "os": "ubuntu_2204",
+  "built_by": "Packer"
+}
